@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome</title>
+</head>
+
+<body>
+
+
+</body>
+</html><img src="photo.jpg" width="300">
+<button>Click Here</button>
+<button onclick="alert('Hello')">Click Here</button>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Meri Website</title>
+</head>
+
+<body>
+
+<h1>Welcome</h1>
+
+<p>Welcome</p>
+
+<img src="https://via.placeholder.com/300">
+
+<br><br>
+
+<button onclick="alert('Welcome to my website')">Click Here</button>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Background Remover</title>
+
+<style>
+body{
+text-align:center;
+font-family:Arial;
+background:#f2f2f2;
+}
+
+.container{
+margin-top:50px;
+}
+
+button{
+padding:10px 20px;
+font-size:16px;
+background:blue;
+color:white;
+border:none;
+border-radius:5px;
+}
+
+img{
+margin-top:20px;
+max-width:300px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>AI Background Remover</h1>
+
+<input type="file" id="upload">
+
+<br><br>
+
+<button onclick="showImage()">Upload Image</button>
+
+<br>
+
+<img id="preview">
+
+</div>
+
+<script>
+
+function showImage(){
+let file=document.getElementById("upload").files[0];
+let url=URL.createObjectURL(file);
+document.getElementById("preview").src=url;
+}
+
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Background Remover</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f4f4;
+text-align:center;
+}
+
+.container{
+background:white;
+width:350px;
+margin:auto;
+margin-top:80px;
+padding:20px;
+border-radius:10px;
+box-shadow:0px 0px 10px gray;
+}
+
+h1{
+color:#333;
+}
+
+button{
+background:#007bff;
+color:white;
+border:none;
+padding:10px 20px;
+font-size:16px;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0056b3;
+}
+
+img{
+margin-top:20px;
+max-width:100%;
+border-radius:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>AI Background Remover</h1>
+
+<input type="file" id="upload">
+
+<br><br>
+
+<button onclick="previewImage()">Preview</button>
+
+<br>
+
+<img id="imagePreview">
+
+<br><br>
+
+<button onclick="removeBg()">Remove Background</button>
+
+<br><br>
+
+<a id="downloadBtn" download="image.png">
+<button>Download Image</button>
+</a>
+
+</div>
+
+<script>
+
+function previewImage(){
+let file=document.getElementById("upload").files[0];
+let url=URL.createObjectURL(file);
+document.getElementById("imagePreview").src=url;
+}
+
+async function removeBg(){
+
+let fileInput=document.getElementById("upload").files[0];
+
+let formData=new FormData();
+formData.append("image_file",fileInput);
+formData.append("size","auto");
+
+let response=await fetch("https://api.remove.bg/v1.0/removebg",{
+method:"POST",
+headers:{
+"X-Api-Key":"https://api.remove.bg/v1.0/removebg"
+},
+body:formData
+});
+
+let blob=await response.blob();
+let url=URL.createObjectURL(blob);
+
+document.getElementById("imagePreview").src=url;
+document.getElementById("downloadBtn").href=url;
+
+}
+
+</script>
+
+</body>
+</html>
